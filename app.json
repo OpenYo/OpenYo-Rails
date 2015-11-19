@@ -1,0 +1,10 @@
+{
+  "name":"OpenYo-Rails",
+  "scripts":{},
+  "env":{
+    "SECRET_KEY_BASE":{
+      "required":true
+    }
+  },
+  "addons":[]
+}
