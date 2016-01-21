@@ -29,10 +29,15 @@ class UsersControllerTest < ActionController::TestCase
     invalid[:name] = ""
     post :create, user: invalid, format: :json
     assert_response :bad_request
+    json = JSON.parse(response.body)
+    assert_not_nil json["text"]
   end
 
   test "valid signup" do
     post :create, user: @user_query, format: :json
     assert_response :success
+    json = JSON.parse(response.body)
+    assert { json["name"] == @user_query[:name] }
+    assert { json["url"] == user_path(@user_query[:name]) }
   end
 end
