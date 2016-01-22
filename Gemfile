@@ -35,6 +35,8 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
   gem 'minitest-power_assert'
+  gem 'pry'
+  gem 'pry-inline'
 end
 
 group :development do

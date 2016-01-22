@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 #  get 'users/new'
 
-  resources :users
+  get '/users', :to => 'users#index'
+  post '/users', :to => 'users#create'
+  get '/users/:name', :to => 'users#show', :as => :user
+
   root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
