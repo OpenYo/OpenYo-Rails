@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :yos, dependent: :destroy
   before_save { self.name = name.downcase }
   validates :name,
     presence: true,
