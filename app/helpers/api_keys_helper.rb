@@ -1,5 +1,6 @@
 module ApiKeysHelper
   def current_user
+    return @current_user if @current_user
     # トークンを検索
     token = ApiKey.find_by(access_token: request.headers["X-API-TOKEN"])
 

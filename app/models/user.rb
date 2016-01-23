@@ -25,4 +25,14 @@ class User < ActiveRecord::Base
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  def become_friends_with(friend)
+    # is there more better method?
+    self.friends.find_or_create_by(user_id: self.id) do |f|
+      f.with_id = friend.id
+    end
+    friend.friends.find_or_create_by(user_id: friend.id) do |f|
+      f.with_id = self.id
+    end
+  end
 end
