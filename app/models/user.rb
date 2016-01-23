@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :yos, dependent: :destroy
   has_many :friends, dependent: :destroy
+  has_many :api_keys, dependent: :destroy
   before_save { self.name = name.downcase }
   validates :name,
     presence: true,
