@@ -1,4 +1,11 @@
 nona:
+  id: 1
   name: nona
   email: nona@example.com
+  password_digest: <%= User.digest('password') %>
+
+other:
+  id: 2
+  name: other
+  email: other@example.com
   password_digest: <%= User.digest('password') %>

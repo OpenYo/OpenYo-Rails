@@ -1,1 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+nonas:
+    access_token: "token"
+    expires_at: <%= 20.years.from_now.utc %>
+    user_id: 1
+    active: true
