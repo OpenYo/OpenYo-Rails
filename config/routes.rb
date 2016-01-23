@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   post '/yo/:to', :to => 'yos#create', :as => :yo
 
-  post '/tokens/', :to => 'users#create_token'
+  post '/tokens/', :to => 'users#create_token', :as => :token
 
   root 'static_pages#home'
 
