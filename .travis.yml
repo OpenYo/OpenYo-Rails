@@ -1,16 +1,14 @@
 language: ruby
 sudo: false
- 
 rvm:
-  - 2.2.3
- 
-bundler_args: --without development --deployment
- 
+- 2.2.3
+bundler_args: "--without development --deployment"
 cache: bundler
- 
 before_script:
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
- 
+- bundle exec rake db:create
+- bundle exec rake db:migrate
 script:
-  - bundle exec rake test
+- bundle exec rake test
+notifications:
+  slack:
+    secure: R6lYiYmyClevUWX604/tlhCtvI1srZlc1gGJf00tssPoKT8UOaLPrQP74wwvsKYNAJNiEa4luSiQnZrdMqKZzmAeHuBqh+getiX5ycj2U9PIkBCV9fg6sTnbPUGzPjfLNUQCJhz4QmikztfE/bK+HMdL2sKcy+HfC14b3g7BWtoliSHth75saSRvZMXFJo5Sxjn2f+3w4UtmTd64Te74EriaO7qlsk5I5A2VbZod+ZZqeQFbAKax33/Jtw0UM68dauaZzhjP3PkbagomEOwh+fKwgBtKUC9droLzM4RdLMhC/Aw5r5IVPApltByBkbuD5K45ndg4KlhFf+Hal1+ogzkgp8uecJBEVRQkRKkZRgd8hVrf7pRat9jXReZ77JNzwgVbwZjh377OWKZ1sJMh/PuvygSoN3/U2k35HBEbL2JSnkJFJi2YZqgbMdXDNE9Wfo+zSeZdEWpxbSRLi/TCVIxgeb1sZRhN2CT7LSmZieZiq6tzAo/ZMUXNa/J4KFjXNJH86sokRCxRVAB5iclSan0gCmyOtdsfw21Idgb86BgZolw2c+kC47OUsdO/39CTF0ZT99GUKUyJ97kuY1jqmP2+Mc0MB1mUojdINs8jzHJC6YpFQ32MtRzstAyyfOmsrXXvKdD8FC0vjGOvwfH1IHVeP2jdivirpRRQfFzDY0E=
