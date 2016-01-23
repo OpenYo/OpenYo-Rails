@@ -18,6 +18,16 @@ class SendYoTest < ActionDispatch::IntegrationTest
     assert { json["text"] == "sent Yo!" }
   end
 
+  test "send yo to friend, no difference about friends count" do
+    token = api_keys(:nonas).access_token
+    assert_difference [ '@other.friends.count', '@user.friends.count' ], 1 do
+      post yo_path(@other), { format: :json }, { "X-API-TOKEN": token }
+    end
+    assert_no_difference [ '@other.friends.count', '@user.friends.count' ] do
+      post yo_path(@other), { format: :json }, { "X-API-TOKEN": token }
+    end
+  end
+
   test "send yo to other without any token" do
     assert_no_difference [ '@other.yos.count', '@other.friends.count', '@user.friends.count' ] do
       post yo_path(@other), { format: :json }
