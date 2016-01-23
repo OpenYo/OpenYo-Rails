@@ -19,7 +19,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should get show with name(format: json)" do
     get :show, name: @user.name, format: :json
     assert_response :success
-    json = JSON.parse(response.body)
+    json = response_json
     assert_equal @user.name, json["name"]
     assert_not_nil json["created_at"]
   end
@@ -29,14 +29,14 @@ class UsersControllerTest < ActionController::TestCase
     invalid[:name] = ""
     post :create, user: invalid, format: :json
     assert_response :bad_request
-    json = JSON.parse(response.body)
+    json = response_json
     assert_not_nil json["text"]
   end
 
   test "valid signup" do
     post :create, user: @user_query, format: :json
     assert_response :success
-    json = JSON.parse(response.body)
+    json = response_json
     assert { json["name"] == @user_query[:name] }
     assert { json["url"] == user_path(@user_query[:name]) }
   end

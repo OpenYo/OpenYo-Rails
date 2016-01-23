@@ -11,7 +11,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_template 'users/creation_fail'
     assert_equal 400, response.status
-    json = JSON.parse(response.body)
+    json = response_json
     assert_not_nil json["text"]
   end
 
@@ -25,7 +25,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_template 'users/creation_success'
     assert_equal 201, response.status
-    json = JSON.parse(response.body)
+    json = response_json
     assert_nil json["text"]
     assert_not_nil json["name"]
     assert_not_nil json["url"]
