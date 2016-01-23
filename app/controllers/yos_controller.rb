@@ -1,5 +1,5 @@
 class YosController < ApplicationController
-  before_action :auth, only: :create
+  before_action :token_auth, only: :create
 
   def create
     if @user = User.find_by(name: yo_params[:to]) then
@@ -14,12 +14,5 @@ class YosController < ApplicationController
   private
   def yo_params
     params.permit(:to)
-  end
-
-  def auth
-    unless current_user then
-      render :authentication_required, status: :unauthorized
-      return false
-    end
   end
 end
