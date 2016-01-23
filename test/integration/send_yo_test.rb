@@ -14,7 +14,7 @@ class SendYoTest < ActionDispatch::IntegrationTest
     end
     assert_template 'yos/sent_yo'
     assert_response :created
-    json = JSON.parse(response.body)
+    json = response_json
     assert { json["text"] == "sent Yo!" }
   end
 
@@ -34,7 +34,7 @@ class SendYoTest < ActionDispatch::IntegrationTest
     end
     assert_template 'application/authentication_required'
     assert_response :unauthorized
-    json = JSON.parse(response.body)
+    json = response_json
     assert { json["text"] == "unauthorized" }
   end
 end

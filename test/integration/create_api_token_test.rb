@@ -12,7 +12,7 @@ class CreateApiTokenTest < ActionDispatch::IntegrationTest
     end
     assert_template 'users/new_token'
     assert_response :created
-    json = JSON.parse(response.body)
+    json = response_json
     assert { not json["token"].nil? }
   end
 
@@ -22,21 +22,21 @@ class CreateApiTokenTest < ActionDispatch::IntegrationTest
     end
     assert_template 'application/authentication_required'
     assert_response :unauthorized
-    json = JSON.parse(response.body)
+    json = response_json
     assert { json["token"].nil? }
     assert { json["text"] == "unauthorized" }
   end
 
   test "create api_token and send yo with that token" do
     post token_path, format: :json, user: { name: @user.name, password: 'password' }
-    json = JSON.parse(response.body)
+    json = response_json
     token = json["token"]
     assert_difference [ '@other.yos.count' ], 1 do
       post yo_path(@other), { format: :json }, { "X-API-TOKEN": token }
     end
     assert_template 'yos/sent_yo'
     assert_response :created
-    json = JSON.parse(response.body)
+    json = response_json
     assert { json["text"] == "sent Yo!" }
 
   end
