@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post '/users', :to => 'users#create'
   get '/users/:name', :to => 'users#show', :as => :user
 
+  post '/yo/:to', :to => 'yos#create', :as => :yo
+
   root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.

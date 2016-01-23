@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119171444) do
+ActiveRecord::Schema.define(version: 20160123120615) do
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "access_token", null: false
+    t.datetime "expires_at"
+    t.integer  "user_id",      null: false
+    t.boolean  "active"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
+
+  create_table "friends", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "with_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "friends", ["user_id", "with_id"], name: "index_friends_on_user_id_and_with_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -22,5 +43,12 @@ ActiveRecord::Schema.define(version: 20151119171444) do
   end
 
   add_index "users", ["name"], name: "index_users_on_name", unique: true
+
+  create_table "yos", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "to_id",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

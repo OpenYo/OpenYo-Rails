@@ -1,0 +1,2 @@
+module YosHelper
+end
