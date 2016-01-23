@@ -11,6 +11,12 @@ User.create!(name:  "nona",
              password:              "foobar",
              password_confirmation: "foobar")
 
+ApiKey.create!(
+    access_token: "token",
+    expires_at: 20.years.from_now.utc,
+    user_id: 1,
+    active: true)
+
 99.times do |n|
   name  = "example#{n+1}"
   email = "example-#{n+1}@railstutorial.org"
