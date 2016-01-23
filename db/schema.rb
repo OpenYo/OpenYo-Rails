@@ -26,11 +26,13 @@ ActiveRecord::Schema.define(version: 20160123120615) do
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
 
   create_table "friends", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "with_id"
+    t.integer  "user_id",    null: false
+    t.integer  "with_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "friends", ["user_id", "with_id"], name: "index_friends_on_user_id_and_with_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -43,8 +45,8 @@ ActiveRecord::Schema.define(version: 20160123120615) do
   add_index "users", ["name"], name: "index_users_on_name", unique: true
 
   create_table "yos", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "to_id"
+    t.integer  "user_id",    null: false
+    t.integer  "to_id",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
