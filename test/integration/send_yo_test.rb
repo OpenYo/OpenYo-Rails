@@ -9,7 +9,7 @@ class SendYoTest < ActionDispatch::IntegrationTest
 
   test "send yo from nona to other" do
     token = api_keys(:nonas).access_token
-    assert_difference [ '@other.yos.count'], 1 do
+    assert_difference [ '@other.yos.count', '@other.friends.count', '@user.friends.count' ], 1 do
       post yo_path(@other), { format: :json }, { "X-API-TOKEN": token }
     end
     assert_template 'yos/sent_yo'
@@ -19,7 +19,7 @@ class SendYoTest < ActionDispatch::IntegrationTest
   end
 
   test "send yo to other without any token" do
-    assert_no_difference [ '@other.yos.count'] do
+    assert_no_difference [ '@other.yos.count', '@other.friends.count', '@user.friends.count' ] do
       post yo_path(@other), { format: :json }
     end
     assert_template 'application/authentication_required'
