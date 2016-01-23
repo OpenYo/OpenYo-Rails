@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'faker'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -31,6 +34,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'sqlite3'
+  gem 'minitest-power_assert'
+  gem 'pry'
+  gem 'pry-inline'
 end
 
 group :development do

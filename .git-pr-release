@@ -1,0 +1,3 @@
+[pr-release "branch"]
+	production = honban
+	staging = master
