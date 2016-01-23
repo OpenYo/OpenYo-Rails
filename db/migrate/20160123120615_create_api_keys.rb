@@ -1,9 +1,9 @@
 class CreateApiKeys < ActiveRecord::Migration
   def change
     create_table :api_keys do |t|
-      t.string :access_token
+      t.string :access_token,  null: false
       t.datetime :expires_at
-      t.integer :user_id
+      t.integer :user_id,      null: false
       t.boolean :active
 
       t.timestamps null: false
