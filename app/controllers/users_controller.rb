@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :password_auth, only: :create_token
   def index
     @users = User.paginate(page: params[:page])
   end
@@ -14,6 +15,11 @@ class UsersController < ApplicationController
     else
       render :creation_fail, status: :bad_request
     end
+  end
+
+  def create_token
+    @token = @user.api_keys.create
+    render :new_token, status: :created
   end
 
   private
