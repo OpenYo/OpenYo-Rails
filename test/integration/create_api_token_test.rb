@@ -8,7 +8,7 @@ class CreateApiTokenTest < ActionDispatch::IntegrationTest
 
   test "create api_token with valid password" do
     assert_difference '@user.api_keys.count', 1 do
-      post token_path, format: :json, user: { name: @user.name, password: 'password' }
+      post token_path, format: :json, name: @user.name, password: 'password'
     end
     assert_template 'users/new_token'
     assert_response :created
@@ -18,7 +18,7 @@ class CreateApiTokenTest < ActionDispatch::IntegrationTest
 
   test "create api_token with invalid password" do
     assert_no_difference '@user.api_keys.count' do
-      post token_path, format: :json, user: { name: @user.name, password: 'this is invalid pass' }
+      post token_path, format: :json, name: @user.name, password: 'this is invalid pass'
     end
     assert_template 'application/authentication_required'
     assert_response :unauthorized
@@ -28,7 +28,7 @@ class CreateApiTokenTest < ActionDispatch::IntegrationTest
   end
 
   test "create api_token and send yo with that token" do
-    post token_path, format: :json, user: { name: @user.name, password: 'password' }
+    post token_path, format: :json, name: @user.name, password: 'password'
     json = response_json
     token = json["token"]
     assert_difference [ '@other.yos.count' ], 1 do
@@ -38,6 +38,5 @@ class CreateApiTokenTest < ActionDispatch::IntegrationTest
     assert_response :created
     json = response_json
     assert { json["text"] == "sent Yo!" }
-
   end
 end
