@@ -15,7 +15,7 @@ class YosController < ApplicationController
     limit = params[:limit] || 20
     page = params[:page] || 1
     since = params[:since] || 20.years.ago
-    @yos = @current_user.yos.where('created_at >= ?', since).limit(limit).page(page)
+    @yos = @current_user.yos.where('created_at >= ?', since).limit(limit.to_i).page(page.to_i)
   end
 
   private
