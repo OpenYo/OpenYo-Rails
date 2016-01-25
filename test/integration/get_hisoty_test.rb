@@ -19,4 +19,20 @@ class GetHisotyTest < ActionDispatch::IntegrationTest
     assert { json["history"][0]["user"] == @user.name }
     assert { not json["history"][0]["yoed_at"].nil? }
   end
+
+  test "get history(limit)" do
+    10.times do
+      post yo_path(@other), { format: :json }, { "X-API-TOKEN": @user_token }
+    end
+    get history_path, { format: :json, limit: 5 }, { "X-API-TOKEN": @other_token }
+    assert_response :ok
+    json = response_json
+    assert { json["count"] == 5 }
+    assert { not json["history"].nil? }
+    assert { json["history"].count == 5 }
+    5.times do |i|
+      assert { json["history"][i]["user"] == @user.name }
+      assert { not json["history"][i]["yoed_at"].nil? }
+    end
+  end
 end
