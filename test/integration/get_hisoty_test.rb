@@ -8,7 +8,7 @@ class GetHisotyTest < ActionDispatch::IntegrationTest
     @other_token = api_keys(:others).access_token
   end
 
-  test "send yo from nona to other" do
+  test "send yo and get history" do
     post yo_path(@other), { format: :json }, { "X-API-TOKEN": @user_token }
     get history_path, { format: :json }, { "X-API-TOKEN": @other_token }
     assert_response :ok
