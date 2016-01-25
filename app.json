@@ -1,6 +1,9 @@
 {
   "name":"OpenYo-Rails",
-  "scripts":{},
+  "repository": "https://github.com/OpenYo/OpenYo-Rails",
+  "scripts":{
+    "postdeploy": "bundle exec rake db:migrate"
+  },
   "env":{
     "SECRET_KEY_BASE":{
       "required":true
