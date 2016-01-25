@@ -1,5 +1,5 @@
 class YosController < ApplicationController
-  before_action :token_auth, only: :create
+  before_action :token_auth, only: [:create, :history]
 
   def create
     if @user = User.find_by(name: yo_params[:to]) then
@@ -9,6 +9,13 @@ class YosController < ApplicationController
     else
       render :no_such_user, status: :not_found
     end
+  end
+
+  def history
+    limit = params[:limit] || 20
+    page = params[:page] || 1
+    since = params[:since] || 20.years.ago
+    @yos = @current_user.yos.where('created_at >= ?', since).limit(limit).page(page)
   end
 
   private
