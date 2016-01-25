@@ -3,7 +3,7 @@ class YosController < ApplicationController
 
   def create
     if @user = User.find_by(name: yo_params[:to]) then
-      @yo = @user.yos.create(user_id: @current_user.id, to_id: @user.id)
+      @yo = @user.yos.create(from_id: @current_user.id)
       @user.become_friends_with(@current_user)
       render :sent_yo, status: :created
     else
