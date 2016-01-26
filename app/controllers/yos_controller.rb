@@ -14,7 +14,12 @@ class YosController < ApplicationController
   def history
     limit = params[:limit] || 20
     page = params[:page] || 1
-    since = params[:since] || 20.years.ago
+    since = params[:since]
+    if not since.nil? then
+      since = Time.parse(since)
+    else
+      since = 20.years.ago
+    end
     @yos = @current_user.yos.where('created_at >= ?', since).limit(limit.to_i).page(page.to_i)
   end
 
