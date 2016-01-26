@@ -33,8 +33,19 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil json["text"]
   end
 
-  test "valid signup" do
+  test "old style signup" do
     post :create, user: @user_query, format: :json
+    assert_response :bad_request
+    json = response_json
+    assert { not json["text"].nil? }
+  end
+
+  test "valid signup" do
+    post :create, name: @user_query[:name],
+         email: @user_query[:email],
+         password: @user_query[:password],
+         password_confirmation: @user_query[:password_confirmation],
+         format: :json
     assert_response :success
     json = response_json
     assert { json["name"] == @user_query[:name] }
