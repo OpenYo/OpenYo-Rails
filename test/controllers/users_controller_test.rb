@@ -20,8 +20,8 @@ class UsersControllerTest < ActionController::TestCase
     get :show, name: @user.name, format: :json
     assert_response :success
     json = response_json
-    assert_equal @user.name, json["name"]
-    assert_not_nil json["created_at"]
+    assert { @user.name == json["name"] }
+    assert { not json["created_at"].nil? }
   end
 
   test "invalid signup" do
@@ -30,7 +30,7 @@ class UsersControllerTest < ActionController::TestCase
     post :create, user: invalid, format: :json
     assert_response :bad_request
     json = response_json
-    assert_not_nil json["text"]
+    assert { not json["text"].nil? }
   end
 
   test "old style signup" do
