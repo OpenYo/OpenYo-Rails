@@ -35,4 +35,20 @@ class GetHisotyTest < ActionDispatch::IntegrationTest
       assert { not json["history"][i]["yoed_at"].nil? }
     end
   end
+
+  test "get history(since)" do
+    post yo_path(@other), { format: :json }, { "X-API-TOKEN": @user_token }
+    sleep 1 # sleep したくない～～。
+    time = Time.now.utc
+    sleep 1
+    post yo_path(@other), { format: :json }, { "X-API-TOKEN": @user_token }
+    get history_path, { format: :json, since: time.to_s }, { "X-API-TOKEN": @other_token }
+    assert_response :ok
+    json = response_json
+    assert { json["count"] == 1 }
+    assert { not json["history"].nil? }
+    assert { json["history"].count == 1 }
+    assert { json["history"][0]["user"] == @user.name }
+    assert { not json["history"][0]["yoed_at"].nil? }
+  end
 end
