@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160123120615) do
+ActiveRecord::Schema.define(version: 20160125131035) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20160123120615) do
 
   create_table "yos", force: :cascade do |t|
     t.integer  "user_id",    null: false
-    t.integer  "to_id",      null: false
+    t.integer  "from_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/users/:name', :to => 'users#show', :as => :user
 
   post '/yo/:to', :to => 'yos#create', :as => :yo
+  get '/history', :to => 'yos#history', :as => :history
 
   post '/tokens/', :to => 'users#create_token', :as => :token
 
